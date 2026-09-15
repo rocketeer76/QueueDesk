@@ -1,3 +1,5 @@
+[![QueueDesk](public/media/social/og-card.png)](https://queuedeskapp.netlify.app/)
+
 # QueueDesk
 
 Support tickets, solved together.
