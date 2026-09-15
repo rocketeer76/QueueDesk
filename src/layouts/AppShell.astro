@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import { product } from "../lib/product";
 const { title = product.name } = Astro.props;
+const socialImage = new URL("/media/social/og-card.png", Astro.url).href;
 ---
 
 <!doctype html>
@@ -10,6 +11,20 @@ const { title = product.name } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={product.tagline} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={product.tagline} />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content={`${product.name} product preview`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={product.tagline} />
+    <meta name="twitter:image" content={socialImage} />
+    <meta
+      name="twitter:image:alt"
+      content={`${product.name} product preview`}
+    />
     <title>{title}</title>
   </head>
   <body style={`--accent: ${product.accent}; --accent-2: ${product.accent2};`}>
