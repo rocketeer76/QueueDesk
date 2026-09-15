@@ -1,0 +1,80 @@
+---
+import AppShell from "../layouts/AppShell.astro";
+import StatusBoard from "../components/StatusBoard";
+import { product } from "../lib/product";
+---
+
+<AppShell>
+  <div class="app-frame">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label={product.name}>
+        <span>{product.name[0]}</span>
+        <strong>{product.name}</strong>
+      </a>
+      <nav aria-label="Primary">
+        <ul>
+          {product.nav.map((item, index) => (
+            <li>
+              <a
+                class:list={{ active: index === 0 }}
+                href={
+                  index === 0
+                    ? "/"
+                    : `/#${item.toLowerCase().replaceAll(" ", "-")}`
+                }
+              >
+                {item}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <div class="profile">
+        <span>PS</span>
+        <div>
+          <strong>Pat Smith</strong>
+          <small>Workspace admin</small>
+        </div>
+      </div>
+    </aside>
+    <main>
+      <header class="topbar">
+        <div>
+          <p class="kicker">{product.eyebrow}</p>
+          <h1>Dashboard</h1>
+        </div>
+        <button class="primary">
+          {product.action}
+          <span aria-hidden="true">＋</span>
+        </button>
+      </header>
+      <section class="metrics" aria-label="Overview">
+        {product.metrics.map(([label, value], index) => (
+          <article>
+            <div class="metric-icon">{String(index + 1).padStart(2, "0")}</div>
+            <p>{label}</p>
+            <strong>{value}</strong>
+            <span class="trend">Updated now</span>
+          </article>
+        ))}
+      </section>
+      <section class="spotlight">
+        <div>
+          <p class="kicker">Today</p>
+          <h2>{product.tagline}</h2>
+          <p>
+            The operational foundation is ready for authentication,
+            database-backed workflows, and the first production slice.
+          </p>
+        </div>
+        <div class="signal" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </section>
+      <StatusBoard client:load activity={product.activity} />
+    </main>
+  </div>
+</AppShell>

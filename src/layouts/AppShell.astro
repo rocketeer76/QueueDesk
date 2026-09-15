@@ -1,0 +1,18 @@
+---
+import "../styles/global.css";
+import { product } from "../lib/product";
+const { title = product.name } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={product.tagline} />
+    <title>{title}</title>
+  </head>
+  <body style={`--accent: ${product.accent}; --accent-2: ${product.accent2};`}>
+    <slot />
+  </body>
+</html>
